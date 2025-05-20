@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Echarts4中国地图下钻至县级</title>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css"/>
+    <!-- Echarts4 -->
+    <script type="text/javascript" src="static/js/echarts.min.js"></script>
+    <!-- 全国344个市、区、州对应的数字编号 -->
+    <script type="text/javascript" src="static/js/citymap.js"></script>
+    <div class="gradient"></div>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* 添加响应式地图容器样式 */
+        #main {
+            width: 100%;
+            height: 80vh; /* 使用视口高度的80%，更好的适应不同屏幕 */
+            min-height: 400px; /* 设置最小高度确保小屏幕上也有足够空间 */
+            position: relative;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+        }
+        
+        /* 返回按钮样式调整 */
+        .retPro {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 999; /* 确保按钮在地图上层 */
+        }
+        
+        .retPro a {
+            user-select: none;
+            height: 30px;
+            background: #375093;
+            line-height: 30px;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            margin-left: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #e5d3aa;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        /* 确保图例在左侧 */
+        .echarts-legend {
+            position: absolute !important;
+            left: 20px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+        }
+    </style>
+</head>
+<body>
+
+<!--调节地图大小-->
+<div id="main"></div>
+<div class="retPro">
+    <a onclick="clickBtn()">return</a>
+</div>
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+<script type="text/javascript" src="static/js/app.js"></script>
+
+<!-- 添加响应式脚本 -->
+<script>
+    // 监听窗口大小变化，重新调整图表大小
+    window.addEventListener('resize', function() {
+        if (typeof chart !== 'undefined') {
+            chart.resize();
+        }
+    });
+    
+    // 确保图例在左侧
+    document.addEventListener('DOMContentLoaded', function() {
+        // 定期检查并调整图例位置
+        setInterval(function() {
+            var legends = document.querySelectorAll('.echarts-legend');
+            legends.forEach(function(legend) {
+                legend.style.left = '20px';
+                legend.style.top = '50%';
+                legend.style.transform = 'translateY(-50%)';
+            });
+        }, 500);
+    });
+</script>
+</body>
+</html>
